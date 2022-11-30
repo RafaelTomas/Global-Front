@@ -6,11 +6,15 @@ import javax.persistence.*;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 
+import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 @Entity
-@Table(name = "patient")
 @Data
+@NoArgsConstructor
+@AllArgsConstructor
+@Table(name = "patient")
 public class Patient {
 
   @Id
