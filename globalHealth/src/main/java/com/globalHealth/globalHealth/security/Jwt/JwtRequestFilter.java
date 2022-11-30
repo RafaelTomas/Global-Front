@@ -1,11 +1,6 @@
-package com.globalHealth.globalHealth.security.Jwt;
+package com.globalHealth.globalHealth.security.jwt;
 
-import java.io.IOException;
-
-import javax.servlet.FilterChain;
-import javax.servlet.ServletException;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
+import io.jsonwebtoken.ExpiredJwtException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -14,13 +9,17 @@ import org.springframework.security.web.authentication.WebAuthenticationDetailsS
 import org.springframework.stereotype.Component;
 import org.springframework.web.filter.OncePerRequestFilter;
 
-import io.jsonwebtoken.ExpiredJwtException;
+import javax.servlet.FilterChain;
+import javax.servlet.ServletException;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import java.io.IOException;
 
 @Component
-public class JwtFilter extends OncePerRequestFilter {
+public class JwtRequestFilter extends OncePerRequestFilter {
 
   @Autowired
-  private JwtService service;
+  private JwtUserDetailsService jwtUserDetailsService;
 
   @Autowired
   private JwtTokenUtil jwtTokenUtil;
@@ -38,16 +37,16 @@ public class JwtFilter extends OncePerRequestFilter {
       try {
         username = jwtTokenUtil.getUsernameFromToken(jwtToken);
       } catch (IllegalArgumentException e) {
-        System.out.println("Unable to get JWT Token");
+        System.out.println("Nao foi possível obter o token JWT");
       } catch (ExpiredJwtException e) {
-        System.out.println("JWT Token has expired");
+        System.out.println("O token JWT expirou");
       }
     } else {
-      logger.warn("JWT Token does not begin with Bearer String");
+      logger.warn("O token JWT não começa com Bearer");
     }
 
     if (username != null && SecurityContextHolder.getContext().getAuthentication() == null) {
-      UserDetails userDetails = this.service.loadUserByUsername(username);
+      UserDetails userDetails = this.jwtUserDetailsService.loadUserByUsername(username);
 
       if (jwtTokenUtil.validateToken(jwtToken, userDetails)) {
         UsernamePasswordAuthenticationToken usernamePasswordAuthenticationToken = new UsernamePasswordAuthenticationToken(
@@ -59,5 +58,4 @@ public class JwtFilter extends OncePerRequestFilter {
     }
     chain.doFilter(request, response);
   }
-
 }

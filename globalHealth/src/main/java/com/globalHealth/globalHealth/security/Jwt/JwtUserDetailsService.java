@@ -1,16 +1,15 @@
-package com.globalHealth.globalHealth.security.Jwt;
+package com.globalHealth.globalHealth.security.jwt;
 
-import java.util.ArrayList;
+import com.globalHealth.globalHealth.user.UserModel;
+import com.globalHealth.globalHealth.user.UserService;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
-import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
-import com.globalHealth.globalHealth.user.UserModel;
-import com.globalHealth.globalHealth.user.UserService;
+import java.util.ArrayList;
 
 @Service
 public class JwtUserDetailsService implements UserDetailsService {
@@ -19,15 +18,9 @@ public class JwtUserDetailsService implements UserDetailsService {
   private UserService service;
 
   @Override
-  public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-    UserModel user = service.getUser(username);
+    public UserDetails loadUserByUsername(String username)  {
+        UserModel user = this.service.getUser(username);
 
-    if (user.getUsername().equals(username)) {
-      return new User(
-          username, user.getPassword(),
-          new ArrayList<>());
-    } else {
-      throw new UsernameNotFoundException("User not found with username: " + username);
+        return new User(username, user.getPassword(), new ArrayList<>());
     }
-  }
 }

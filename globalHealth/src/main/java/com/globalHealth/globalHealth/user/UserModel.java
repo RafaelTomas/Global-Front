@@ -6,13 +6,12 @@ import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
 
-
 @Entity
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
 @Table(name = "users")
-public class UserModel {
+public class UserModel  {
   @Id
   @GeneratedValue(strategy = GenerationType.IDENTITY)
   private Integer userId;
@@ -20,5 +19,6 @@ public class UserModel {
   private String username;
   @Column(nullable = false)
   private String password;
+
 
 }
