@@ -9,8 +9,8 @@ import { AutenticacaoService } from 'src/app/autenticacao/autenticacao.service';
 })
 export class LoginComponent implements OnInit {
 
-  usuario = '';
-  senha = '';
+  email = '';
+  password = '';
 
   constructor(
     private authService: AutenticacaoService,
@@ -21,13 +21,15 @@ export class LoginComponent implements OnInit {
   }
 
   login() {
-    this.authService.autenticar(this.usuario, this.senha).subscribe({
+    this.authService.autenticar(this.email, this.password).subscribe({
       next: () => this.router.navigate(['pacientes']),
       error: (error) => {
-        alert("Usuario ou senha invalido")
+        alert("Email ou senha invalido")
         console.log(error)
       }
-    });
-  }
-
+    },
+    )
+  };
 }
+
+

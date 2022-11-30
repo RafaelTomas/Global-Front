@@ -2,15 +2,16 @@
 
 <form class="form mt-4" (ngSubmit)="login()" #loginForm="ngForm">
   <div class="mb-3">
-    <input class="form-control" placeholder="Nome do usuário" [(ngModel)]="usuario" name="usuario" type="text"
-      #campoUsuario="ngModel" required />
-    <app-mensagem *ngIf="campoUsuario.invalid && campoUsuario.touched" mensagem="Usuário obrigatorio"></app-mensagem>
+    <input class="form-control" placeholder="Digite seu email" [(ngModel)]="email" name="email" type="text"
+      #campoEmail="ngModel" required />
+    <app-mensagem *ngIf="campoEmail.invalid && campoEmail.touched" mensagem="Email obrigatorio"></app-mensagem>
   </div>
 
   <div class="mb-3">
-    <input placeholder="Senha" type="password" class="form-control" [(ngModel)]="senha" name="senha" #campoSenha="ngModel" required />
+    <input placeholder="Senha" type="password" class="form-control" [(ngModel)]="password" name="senha" #campoSenha="ngModel" required />
     <app-mensagem *ngIf="campoSenha.touched && campoSenha.invalid" mensagem="Senha obrigatória"></app-mensagem>
   </div>
 
   <button [disabled]="loginForm.invalid" type="submit" class="btn btn-primary btn-block">Login</button>
 </form>
+<p> Não é um usuário?<a [routerLink]="['novousuario']">Se cadastre!</a></p>

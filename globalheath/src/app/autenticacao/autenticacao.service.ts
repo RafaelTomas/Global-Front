@@ -9,10 +9,10 @@ export class AutenticacaoService {
   constructor(private httpClient: HttpClient) { }
 
   autenticar(usuario: string, senha: string): Observable<any> {
-    const URL: string = 'http://localhost:3000/user/login';
+    const URL: string = 'http://localhost:3333/api/login';
 
     const autenticar = this.httpClient.post(URL, {
-      userName: usuario,
+      email: usuario,
       password: senha,
     });
 

@@ -1,0 +1,31 @@
+<h4 class="text-center">Registre-se </h4>
+
+<form class="form mt-4" [formGroup]="novoUsuarioForm" (submit)="cadastrar()">
+  <div class="mb-3">
+    <input class="form-control" placeholder="Email" type="email" formControlName="email" required />
+    <app-mensagem
+      *ngIf="
+      novoUsuarioForm.get('email')?.errors?.['required']&&
+      novoUsuarioForm.get('email')?.touched
+      "
+      mensagem="Email obrigatório"></app-mensagem>
+    <app-mensagem
+      *ngIf="
+      novoUsuarioForm.get('email')?.errors?.['email']"
+      mensagem="Email no formato incorreto"></app-mensagem>
+  </div>
+
+  <div class="mb-3">
+    <input placeholder="Senha" type="password" class="form-control" formControlName="password" />
+    <app-mensagem *ngIf="novoUsuarioForm.get('password')?.errors?.['required'] && novoUsuarioForm.get('password')?.touched" mensagem="Senha obrigatório"></app-mensagem>
+  </div>
+
+  <div class="mb-3">
+    <input placeholder="CPF" type="text" class="form-control" formControlName="cpf" />
+      <app-mensagem *ngIf="novoUsuarioForm.get('cpf')?.errors?.['required'] && novoUsuarioForm.get('cpf')?.touched"
+        mensagem="CPF obrigatório"></app-mensagem>
+  </div>
+
+  <button type="submit" class="btn btn-primary btn-block">Login</button>
+</form>
+<p> E um usuário?<a [routerLink]="['']">Entre!</a></p>
