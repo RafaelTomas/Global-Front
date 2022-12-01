@@ -1,4 +1,4 @@
-package com.globalHealth.globalHealth.security.jwt;
+package com.globalHealth.globalHealth.config.security.jwt;
 
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jwts;

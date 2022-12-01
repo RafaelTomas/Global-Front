@@ -1,4 +1,4 @@
-package com.globalHealth.globalHealth.security;
+package com.globalHealth.globalHealth.config.security;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
@@ -12,7 +12,7 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 
-import com.globalHealth.globalHealth.security.jwt.JwtRequestFilter;
+import com.globalHealth.globalHealth.config.security.jwt.JwtRequestFilter;
 
 @Configuration
 public class SecurityConfig {
@@ -32,13 +32,29 @@ public class SecurityConfig {
     return new BCryptPasswordEncoder();
   }
 
+  private static final String[] AUTH_WHITELIST = {
+      // -- Swagger UI v2
+      "/v2/api-docs",
+      "/swagger-resources",
+      "/swagger-resources/**",
+      "/configuration/ui",
+      "/configuration/security",
+      "/swagger-ui.html",
+      "/webjars/**",
+      // -- Swagger UI v3 (OpenAPI)
+      "/v3/api-docs/**",
+      "/swagger-ui/**"
+      // other public endpoints of your API may be appended to this array
+  };
+
   @Bean
   public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
 
     http.csrf().disable()
         .authorizeRequests()
-        .antMatchers(HttpMethod.POST, "/users", "/login").permitAll()
-        .antMatchers("/swagger-ui/**", "/swagger-resources/**", "/v2/api-docs/**").permitAll()
+        .antMatchers(HttpMethod.POST, "/users/create", "/login").permitAll()
+        .antMatchers(
+            AUTH_WHITELIST).permitAll()
         .anyRequest().authenticated()
         .and().cors()
         .and().exceptionHandling()

@@ -1,4 +1,4 @@
-package com.globalHealth.globalHealth.security.Dto;
+package com.globalHealth.globalHealth.config.security.Dto;
 
 import lombok.Getter;
 

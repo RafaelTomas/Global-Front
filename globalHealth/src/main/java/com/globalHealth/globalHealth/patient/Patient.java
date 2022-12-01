@@ -6,6 +6,7 @@ import javax.persistence.*;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 
+import io.swagger.annotations.ApiModelProperty;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -22,7 +23,7 @@ public class Patient {
   private Integer id;
   @Column(nullable = false, length = 150)
   private String name;
-  @Column(nullable = false, unique = true, length = 9)
+  @Column(nullable = false, length = 9)
   private String healthInsuranceCardId;
   @Column(nullable = false, length = 100)
   private String address;

@@ -1,4 +1,4 @@
-package com.globalHealth.globalHealth.security;
+package com.globalHealth.globalHealth.config.security;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -9,10 +9,10 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.globalHealth.globalHealth.security.Dto.JwtRequestDto;
-import com.globalHealth.globalHealth.security.Dto.JwtResponseDto;
-import com.globalHealth.globalHealth.security.jwt.JwtTokenUtil;
-import com.globalHealth.globalHealth.security.jwt.JwtUserDetailsService;
+import com.globalHealth.globalHealth.config.security.Dto.JwtRequestDto;
+import com.globalHealth.globalHealth.config.security.Dto.JwtResponseDto;
+import com.globalHealth.globalHealth.config.security.jwt.JwtTokenUtil;
+import com.globalHealth.globalHealth.config.security.jwt.JwtUserDetailsService;
 import com.globalHealth.globalHealth.user.UserModel;
 import com.globalHealth.globalHealth.user.UserService;
 
