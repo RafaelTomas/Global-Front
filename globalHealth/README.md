@@ -36,12 +36,12 @@ $ run
 # O servidor inciará na porta:8080 - acesse http://localhost:8080
 
 ```
-## ☕ Usando Health
+## ☕ Acessar o Swagger
 
-Para usar Health, siga estas etapas:
+Para usar Swagger, siga estas etapas:
 
 ```
-acesse http://localhost:8080/
+acesse http://localhost:8080/swagger-ui.html
 ```
 
 
