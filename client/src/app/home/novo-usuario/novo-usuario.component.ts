@@ -12,22 +12,28 @@ import { NovoUsuarioService } from './novo-usuario.service';
 export class NovoUsuarioComponent implements OnInit {
   novoUsuarioForm!: FormGroup;
 
-  constructor(private formBuilder: FormBuilder, private novoUsuarioService: NovoUsuarioService, private router: Router) { }
+  constructor(
+    private formBuilder: FormBuilder,
+    private novoUsuarioService: NovoUsuarioService,
+    private router: Router) { }
 
   ngOnInit(): void {
     this.novoUsuarioForm = this.formBuilder.group({
-      email: ['', [Validators.required, Validators.email] ],
-      cpf: ['', [Validators.required, Validators.maxLength(11)]],
+      email: ['', [Validators.required, Validators.email]],
+      fullName: ['', [Validators.required, Validators.minLength(4)]],
+      userName: ['', [Validators.required]],
       password: ['', [Validators.required, Validators.min(8)]]
     })
   }
 
   cadastrar() {
-    const novoUsuario = this.novoUsuarioForm.getRawValue() as NovoUsuario;
-    this.novoUsuarioService.cadastrarNovoUsuario(novoUsuario).subscribe({
-      next:() => this.router.navigate(['']),
-      error:(err) => console.log(err),
+    if (this.novoUsuarioForm.valid) {
+      const novoUsuario = this.novoUsuarioForm.getRawValue() as NovoUsuario;
+      this.novoUsuarioService.cadastrarNovoUsuario(novoUsuario).subscribe({
+        next: () => this.router.navigate(['']),
+        error: (err) => console.log(err),
       })
+    }
   }
 
 }

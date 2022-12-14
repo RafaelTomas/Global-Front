@@ -6,7 +6,7 @@ import { NovoUsuario } from './novo-usuario';
   providedIn: 'root'
 })
 export class NovoUsuarioService {
-  URL: string = 'http://localhost:3333/api/users';
+  URL: string = 'http://localhost:3000/user/signup';
   constructor(private httpClient: HttpClient) { }
 
   cadastrarNovoUsuario(novoUsuario: NovoUsuario) {
